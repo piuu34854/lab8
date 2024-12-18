@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>lab 9</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Підключення CSS та JS для Owl Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <style>
+      /* Загальні стилі для сторінки */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        /* Світло-сірий фон */
+      }
+
+      /* Стилі для верхньої частини */
+      .navbar {
+        background-color: #ffffff;
+        /* Синій колір для навігації */
+        color: #262fe5;
+        /* Білий текст на навігації */
+      }
+
+      .navbar-brand {
+        font-size: 1.5rem;
+        /* Збільшити розмір тексту логотипу */
+      }
+
+      /* Стилі для пунктів навігації */
+      .nav-link {
+        color: #fff;
+        /* Білий текст для пунктів навігації */
+      }
+
+      /* Збільшення контрастності для виділеного пункту навігації */
+      .nav-item.active .nav-link {
+        background-color: #0056b3;
+        /* Темно-синій колір для виділеного пункту навігації */
+      }
+
+      /* Загальні стилі для контенту */
+      .container {
+        padding: 20px;
+        /* Додати відступ від вмісту до контейнера */
+        background-color: #fff;
+        /* Білий фон для контенту */
+        border-radius: 5px;
+        /* Закруглити кути контейнера */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        /* Тінь для контейнера */
+      }
+
+      /* Стилі для пошукової панелі */
+      .form-control {
+        border: 1px solid #ced4da;
+        /* Колір рамки */
+        border-radius: 0;
+        /* Закруглити кути текстового поля */
+      }
+
+      .input-group .btn {
+        border-radius: 0;
+        /* Закруглити кути кнопки */
+      }
+
+      /* Збільшити розмір кнопки пошуку */
+      .input-group .btn {
+        padding: 0.375rem 1rem;
+      }
+
+      /* Збільшити розмір текстового поля */
+      .form-control {
+        padding: 0.375rem 1rem;
+        font-size: 1rem;
+        /* Збільшити розмір тексту в текстовому полі */
+      }
+
+      /* Змінити фоновий колір текстового поля при фокусі */
+      .form-control:focus {
+        background-color: #fff;
+        /* Білий фон при фокусі */
+      }
+
+      /* Змінити колір тексту у кнопки пошуку при фокусі */
+      .input-group .btn:focus {
+        color: #007bff;
+        /* Синій колір тексту при фокусі */
+      }
+
+      /* Стилі для слайдів у каруселі */
+      .owl-carousel .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 230px;
+        /* Задайте бажану висоту для слайдів */
+        background-color: #f4f4f4;
+        /* Фоновий колір слайдів */
+        border: 1px solid #ccc;
+        /* Рамка навколо слайдів */
+      }
+
+      .owl-carousel .item img {
+        max-width: 100%;
+        /* Зробити зображення вписаним у контейнер */
+        max-height: 100%;
+        /* Зробити зображення вписаним у контейнер */
+      }
+
+      /* Стилі для активного слайда */
+      .owl-carousel .owl-item.active {
+        border: 2px solid #007bff;
+        /* Рамка для активного слайда */
+      }
+
+      /* Зміна кольору точок навігації */
+      .owl-dots .owl-dot {
+        background: #ccc;
+      }
+
+      .owl-dots .owl-dot.active {
+        background: #007bff;
+        /* Колір активної точки */
+      }
+
+      .container {
+        margin-top: 50px;
+      }
+
+      .iconky {
+        font-size: 54px;
+        vertical-align: middle;
+        text-align: left;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+        /* Змініть ширину за вашим вибором */
+      }
+
+      .pagination ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        /* Змініть ширину за вашим вибором */
+      }
+
+      .pagination li {
+        margin: 0 10px;
+        /* Змініть відступи за вашим вибором */
+      }
+
+      .pagination a {
+        text-decoration: none;
+        color: #333;
+        padding: 12px 20px;
+        /* Змініть розміри за вашим вибором */
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .pagination .active {
+        background-color: #007BFF;
+        color: #fff;
+        border: 1px solid #007BFF;
+      }
+
+      .tooltip-container {
+        position: relative;
+        display: inline-block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .tooltip-text {
+        visibility: hidden;
+        width: 120px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s, visibility 0.3s;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        /* Тінь для підказки */
+      }
+
+      .tooltip-container:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .accordion {
+        width: 300px;
+      }
+
+      .section {
+        border: 1px solid #007BFF;
+        margin-bottom: 8px;
+        overflow: hidden;
+        background-color: #007BFF;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        position: relative;
+      }
+
+      .section:hover {
+        background-color: #007BFF;
+      }
+
+      .section-content {
+        display: none;
+        padding: 10px;
+      }
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+        margin: 20px;
+      }
+
+      .dropdown-button {
+        padding: 10px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #007BFF;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: #fff;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #007BFF;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Логотип</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Головна <span class="sr-only">(поточна)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Про нас</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Послуги</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Контакти</a>
+          </li>
+        </ul>
+      </div>
+      <form class="form-inline">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Пошук">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Пошук</button>
+          </div>
+        </div>
+      </form>
+    </nav>
+    <div class="owl-carousel">
+      <div class="item">
+        <img src="1.jpeg" alt="Зображення 1">
+      </div>
+      <div class="item">
+        <img src="2.jpeg" alt="Зображення 2">
+      </div>
+      <div class="item">
+        <img src="3.jpeg" alt="Зображення 3">
+      </div>
+    </div>
+    <div class="button-container">
+      <a href="https://example.com" class="btn btn-primary" target="_blank">Кнопка 1</a>
+      <a href="https://example.com" class="btn btn-primary" target="_blank">Кнопка 2</a>
+      <a href="https://example.com" class="btn btn-primary" target="_blank">Кнопка 3</a>
+      <a href="https://example.com" class="btn btn-primary" target="_blank">Кнопка 4</a>
+      <a href="https://example.com" class="btn btn-primary" target="_blank">Кнопка 5</a>
+    </div>
+    <div class="tooltip-container">
+      <span class="tooltip-text">Це мій текст підказки.</span>
+      <button class="tooltip-trigger">Hover для підказки</button>
+    </div>
+    <div class="accordion">
+      <div class="section" onclick="toggleSection(1)"> Секція 1 <div class="icon">▶</div>
+        <div class="section-content"> Тут повинен бути текст </div>
+      </div>
+      <div class="section" onclick="toggleSection(2)"> Секція 2 <div class="icon">▶</div>
+        <div class="section-content"> Тут повинен бути текст </div>
+      </div>
+      <div class="section" onclick="toggleSection(3)"> Секція 3 <div class="icon">▶</div>
+        <div class="section-content"> Тут повинен бути текст </div>
+      </div>
+    </div>
+    <div class="containe">
+      <div class="row">
+        <div class="col">
+          <table class="table table-primary table-bordered table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Машина</th>
+                <th scope="col">Ціна</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>x6</td>
+                <td>100000$</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>m5</td>
+                <td>120000$</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>328i</td>
+                <td>15000$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card block" style="width: 18rem;">
+      <img src="2.jpeg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">BMW M5 F90</h5>
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary">Читати далі</a>
+      </div>
+    </div>
+    <div class="iconky">
+      <a href="https://twitter.com/" target="_blank" title="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.facebook.com/" target="_blank" title="Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+    <div class="dropdown">
+      <button class="dropdown-button">Select an option</button>
+      <div class="dropdown-content">
+        <a href="#">Option 1</a>
+        <a href="#">Option 2</a>
+        <a href="#">Option 3</a>
+      </div>
+      <div class="pagination">
+        <nav aria-label="...">
+          <ul class="pagination">
+            <li class="page-item disabled">
+              <a class="page-link">Попередня</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">Наступна</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#navbarNavDropdown">Головна</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#navbarNavDropdown">Бібліотека</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#navbarNavDropdown">Автор сайту</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Інформація</li>
+        </ol>
+      </nav>
+      <div style="display: flex; justify-content: center; align-items: center; height: 25vh;">
+        <i class="bi bi-brightness-alt-high-fill" style="font-size: 4rem; color: rgb(233, 151, 11);"></i>
+        <i class="bi bi-image-fill" style="font-size: 4rem; color: rgb(64, 181, 236);"></i>
+        <i class="bi bi-binoculars-fill" style="font-size: 4rem; color: rgb(49, 225, 102);"></i>
+      </div>
+      <script>
+        $(document).ready(function() {
+          $(".owl-carousel").owlCarousel({
+            items: 3, // Кількість відображуваних елементів
+            loop: true, // Безкінечний луп
+            margin: 10, // Відступ між елементами
+            autoplay: true, // Автоматична прокрутка
+            autoplayTimeout: 3000, // Інтервал автоматичної прокрутки (3 секунди)
+          });
+        });
+
+        function toggleSection(sectionNumber) {
+          var section = document.querySelector('.section:nth-child(' + sectionNumber + ')');
+          var content = section.querySelector('.section-content');
+          var icon = section.querySelector('.icon');
+          if (content.style.display === 'block') {
+            content.style.display = 'none';
+            icon.innerHTML = '▶';
+          } else {
+            content.style.display = 'block';
+            icon.innerHTML = '▼';
+          }
+        }
+
+        function handleButtonClick(buttonText) {
+          alert(`Clicked on button: ${buttonText}`);
+        }
+
+        function updateWindowWidth() {
+          document.getElementById('windowWidth').innerText = window.innerWidth;
+        }
+        window.addEventListener('resize', updateWindowWidth);
+        updateWindowWidth(); // Викликати для початкового відображення ширини вікна
+      </script>
+      <!-- Підключення JavaScript Bootstrap через CDN (опціонально) -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
